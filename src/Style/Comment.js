@@ -14,7 +14,7 @@ const Comment = ({ post_id, i_comments }) => {
       console.log("Can't Post an Empty Comment");
     } else {
       const res = await axios.patch(
-        `http://localhost:8000/post/${post_id}/comment`,
+        `https://backedconnectopia.onrender.com/post/${post_id}/comment`,
         { text: comment },
         {
           withCredentials: true,
