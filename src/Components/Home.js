@@ -13,11 +13,12 @@ const Home = () => {
 
   const getOnUser = async () => {
     console.log("send");
+    const token = localStorage.getItem('token');
     await axios
-      .get("https://backedconnectopia.onrender.com/user", {
-        withCredentials: true,
+      .get("http://localhost:8000/user", {
         headers: {
           "Content-Type": "application/json",
+          "Authorization" : `Bearer ${token}`
         },
       })
       .then((data) => {

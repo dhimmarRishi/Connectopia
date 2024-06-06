@@ -8,16 +8,17 @@ import * as yup from "yup";
 
 const CreatePost = ({ img, updateContent }) => {
   const baseURL = "https://backedconnectopia.onrender.com/assets/";
-
+  const token = localStorage.getItem('token')
+  
   const handlePostSubmit = async (data) => {
     console.log(data);
     const formData = new FormData();
     formData.append("text", data.text);
     formData.append("img", data.img);
-    const res = await axios.post("https://backedconnectopia.onrender.com/post", formData, {
-      withCredentials: true,
+    const res = await axios.post("http://localhost:8000/post", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
+        "Authorization": `Bearer ${token}`
       },
     });
 

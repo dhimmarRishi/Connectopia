@@ -5,12 +5,12 @@ import * as yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 import axios from "axios";
 // axios.defaults.withCredentials = true;
 
 const Login = () => {
-  const [token, setToken, removeToken] = useCookies();
+  // const [token, setToken, removeToken] = useCookies();
   const [hidePassword, setHidePassword] = useState(true);
   const navigate = useNavigate();
 
@@ -22,13 +22,14 @@ const Login = () => {
     console.log("Send");
     console.log("Data : " + JSON.stringify(data)) 
     await axios
-      .post("https://backedconnectopia.onrender.com/auth/login", data , {
+      .post("http://localhost:8000/auth/login", data , {
 
       })
       .then(async (res) => {
         console.log(res.status);
-        if (res.status == 200 && res.data.token) {
-          setToken("token", res.data.token);
+        if (res.status === 200 && res.data.token) {
+          // setToken("token", res.data.token);
+          localStorage.setItem("token" , res.data.token)
           console.log("Navigating to /home")
           navigate("/home");
         }

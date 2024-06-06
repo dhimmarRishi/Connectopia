@@ -3,7 +3,7 @@ import React from "react";
 import Avatar from "../Style/AvatarCon";
 
 const Profile = ({ img, Name, handle, isComment }) => {
-  const baseUrl = "https://backedconnectopia.onrender.com/assets/"
+  const baseUrl = "http://localhost:8000/assets/"
   return (  
     <div>
       {" "}

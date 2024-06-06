@@ -5,13 +5,13 @@ import * as bgimg from "../assets/default-bg.jpg";
 import AvatarCon from "../Style/AvatarCon";
 
 function UserPanel({user}) {
-  const baseURL = 'https://backedconnectopia.onrender.com/assets/';
+  const baseURL = 'http://localhost:8000/assets/';
 
   return (
     <div className="userPanel mr-4 mt-3 bg-gray-800 w-full h-full rounded-2xl flex flex-col justify-between items-center overflow-hidden min-w-[270px] lg:max-w-[300px] max-w-full  sm:hidden md:hidden  lg:flex">
       <div className="bgimg overflow-hidden h-24 ">
-        {console.log(baseURL + user.pfp)}
-        <img className="" src={bgimg} alt="..."></img>
+        {console.log(baseURL.substring(0, baseURL.length -1) + bgimg.default)}
+        <img className="" src={baseURL + 'default-bg.jpg'} alt="..."></img>
       </div>
 
       <div className="user mt-10 mb-5 relative z-10">

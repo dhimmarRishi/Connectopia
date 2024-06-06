@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import Profile from "../Components/Profile";
 import axios from "axios";
-import AvatarCon from "./AvatarCon";
+// import AvatarCon from "./AvatarCon";
 
 const Comment = ({ post_id, i_comments }) => {
   const [comment, setComment] = useState("");
-  const [comments , setComments] = useState(i_comments);
+  const [comments, setComments] = useState(i_comments);
 
   const handleSubmit = async (e) => {
+    const token = localStorage.getItem('token')
     e.preventDefault();
 
     if (!comment) {
       console.log("Can't Post an Empty Comment");
     } else {
       const res = await axios.patch(
-        `https://backedconnectopia.onrender.com/post/${post_id}/comment`,
+        `http://localhost:8000/post/${post_id}/comment`,
+
         { text: comment },
         {
-          withCredentials: true,
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
           },
         }
       );
@@ -58,13 +60,18 @@ const Comment = ({ post_id, i_comments }) => {
         {comments.map((comment) => {
           // console.log(comment);
           return (
-            <div className="post my-2 border-b-2 border-b-gray-500 py-2" key={comment._id}>
+            <div
+              className="post my-2 border-b-2 border-b-gray-500 py-2"
+              key={comment._id}
+            >
               <Profile
                 img={comment.pfp}
                 handle={comment.a_handle}
                 isComment={true}
               />
-              <div className="ml-3 text-sm bg-gray-700 p-2 rounded-sm">{comment.text}</div>
+              <div className="ml-3 text-sm bg-gray-700 p-2 rounded-sm">
+                {comment.text}
+              </div>
             </div>
           );
         })}

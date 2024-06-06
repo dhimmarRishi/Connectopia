@@ -52,7 +52,7 @@ function Register() {
     console.log(formData);
     
     const res = await axios.post(
-      "https://backedconnectopia.onrender.com/auth/register",
+      "http://localhost:8000/auth/register",
       formData,
     );
     

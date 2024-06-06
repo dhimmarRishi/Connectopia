@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
@@ -7,7 +7,7 @@ import Profile from "../Components/Profile";
 import axios from "axios";
 import Comments from "./Comment";
 
-const baseURLPosts = "https://backedconnectopia.onrender.com/assets/posts/";
+const baseURLPosts = "http://localhost:8000/assets/posts/";
 // const baseURLPfp = "http://localhost:8000/assets/";
 // const obj = [
 //   {
@@ -44,13 +44,14 @@ function Feed({ post }) {
   };
 
   const updateLikePost = async (id) => {
+    const token = localStorage.getItem('token')
     const res = await axios.patch(
-      `https://backedconnectopia.onrender.com/post/${id}/like`,
+      `http://localhost:8000/post/${id}/like`,
       { name: "Rishi" },
       {
-        withCredentials: true,
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearear ${token}`
         },
       }
     );

@@ -4,11 +4,12 @@ import AvatarCon from "./AvatarCon";
 import axios from "axios";
 
 const FriendProfile = ({friend}) => {
+  const token = localStorage.getItem('token')
   const addFriend = async (e) => {
-    const res = await axios.post("https://backedconnectopia.onrender.com/user/friend" , {friend_handle : e.target.value} , {
-      withCredentials : true,
+    const res = await axios.post("http://localhost:8000/user/friend" , {friend_handle : e.target.value} , {
       headers : {
-        "Content-Type" : "application/json"
+        "Content-Type" : "application/json",
+        "Authorization": `Bearer ${token}`
       }
     });
     const resData = await res.data;
@@ -23,7 +24,7 @@ const FriendProfile = ({friend}) => {
   return (
     <div className="friend w-full ">
       <div className="user-info flex gap-3 p-2  hover:bg-gray-700">
-        <AvatarCon img={th} />
+        <AvatarCon img={th.default} />
         <div className="info sm:flex flex-col pt-2 ">
           <div className="name text-sm cursor-pointer hover:underline">
             {friend?.name}
